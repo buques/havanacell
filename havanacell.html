@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="script.js" defer></script>
+
+    <title>Compra por WhatsApp</title>
+<style>
+/* Estilos generales */
+body {
+    background: linear-gradient(
+        to bottom,
+        #E6E6FA,
+        #E6E6FA 40%,
+        white 60%,
+        white
+    );
+    background-attachment: fixed;
+    margin: 0;
+    padding-bottom: 75px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+/* Header */
+.location-icon {
+    width: 20px;
+    height: 20px;
+}
+.header {
+    position: fixed; /* Hacemos el header fijo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Aseguramos que esté por encima de todo */
+    margin: 0;
+    border-radius: 0; /* Eliminamos el borde redondeado */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Aumentamos sombra para mejor efecto */
+}
+
+.logo-container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centramos el contenido del header */
+    padding: 0 20px; /* Añadimos padding lateral */
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FF6B6B;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    width: 75%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 15px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.search-bar input {
+    flex: 1;
+    border: none;
+    background: none;
+    font-size: 16px;
+    padding: 8px;
+    outline: none;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    color: #00CED1;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilos del contenedor del slider */
+        .slider-container {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto; /* Solo centrado horizontal */
+    overflow: hidden;
+    margin-bottom: 20px; /* Espacio fijo inferior */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+        /* Estilos del slider */
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Estilos de cada slide */
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide img {
+            margin: 8px auto;
+            width: 98%;
+            height: 204px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.0);
+   border:0px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+/* Tarjetas de productos */
+.cards-container {
+    width: 95%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card h2 {
+    font-size: 16px;
+    color: #2d3436;
+    margin: 0 0 8px;
+    font-weight: 600;
+   overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+    text-overflow:ellipsis;
+    margin:2px 2px;
+}
+.card p {
+    font-size: 13px;
+    color: #636e72;
+    margin: 0;
+    line-height: 1.4;
+    display: none; /* Oculto por diseño móvil */
+}
+.card .precio {
+    font-size: 18px;
+    color: #00CED1;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+}
+
+.button-container button {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.button-container .add {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.button-container .add:hover {
+    background: #28a745;
+    color: white;
+}
+
+.button-container .remove {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.button-container .remove:hover {
+    background: #dc3545;
+    color: white;
+}
+
+.cantidad-span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2A5C82;
+}
+
+/* Modales */
+.modalCard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: White;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 70vh;
+    width: 80%;
+    text-align: center;
+    overflow-y:auto;
+    margin-bottom:70px;
+}
+#question{
+margin-top:10px;
+height:70px;
+width:80%;
+}
+
+.modal-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+#modalDescription{
+text-align:center;
+}
+
+#modalPrice {
+color:#00CED1;
+font-weight:bold;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#questionButton {
+    background-color: orange;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+#modalContent {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.modal-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Elementos del formulario */
+#modal input,
+#modal select,
+#modal textarea {
+    width: 90%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+#modal input:focus,
+#modal select:focus,
+#modal textarea:focus {
+    border-color: #00CED1;
+    outline: none;
+}
+
+#opcionesEnvio {
+    appearance: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center/16px;
+    padding-right: 40px;
+}
+
+.modal-button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-button-container button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+#enviarWhatsApp {
+    background: #25D366;
+    color: white;
+}
+
+#cerrar {
+    background: #dc3545;
+    color: white;
+}
+
+/* Carrito flotante */
+.carrito-flotante {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    background: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+   border:0px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.carrito-flotante img {
+    width: 30px;
+    height: 30px;
+    filter: invert(1);
+}
+
+.carrito-notificacion {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #dc3545;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Footer */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+    z-index: 999;
+}
+
+.bottom-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #636e72;
+    transition: all 0.2s ease;
+}
+
+.bottom-nav-link:hover {
+    color: #25D366;
+    transform: translateY(-3px);
+}
+
+.bottom-nav-icon {
+    width: 28px;
+    height: 28px;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .card h2 {
+        font-size: 14px;
+    }
+    
+    .card .precio {
+        font-size: 16px;
+    }
+}
+/* Filtros */
+.filter-boton-filtros {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin: 15px 0;
+}
+
+.filter-buttons {
+    display: inline-flex;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.filter-buttons button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #00CED1;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-buttons button:hover {
+    background: #009999;
+    transform: translateY(-2px);
+}
+</style>
+<!--Ubicacion-->
+<header class="header">
+        <div class="logo-container">
+            <img src="https://img.icons8.com/?size=100&id=AgFKmAmo11FB&format=png&color=000000" alt="Pizza Icon" class="logo-icon">
+            <span class="logo-text"> HABANA CELL</span>
+        </div>
+    </header>
+<!--Barra de búsqueda-->
+<div class="search-bar">
+    <input type="text" id="search" placeholder="Buscar productos...">
+    <button><i class="fas fa-search"></i></button>
+</div>
+
+<!-- Slider -->
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide"><img src="https://i.postimg.cc/5y4pNJTK/Grid-Art-20240914-164829365.jpg" alt="Slide 1"></div>
+        <div class="slide"><img src="https://i.postimg.cc/d0WVSjv7/Grid-Art-20240914-163109698.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="https://i.postimg.cc/fW1jrxTg/Grid-Art-20240914-165906430.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="https://i.postimg.cc/YqfGzg4F/Grid-Art-20240914-170946100.jpg" alt="Slide 3"></div>
+    </div>
+</div>
+
+<!-- Botones de filtro -->
+<div class="filter-boton-filtros">
+<div class="filter-buttons">
+<button onclick="filtrarPorCategoria('all')">Todos</button>
+    <button onclick="filtrarPorCategoria('moviles')">Móviles </button>
+    <button onclick="filtrarPorCategoria('laptops')">Laptops</button>
+    <button onclick="filtrarPorCategoria('accesorios')">Accesorios</button>
+    <button onclick="filtrarPorCategoria('otros')">Otros</button>
+</div></div></div>
+
+<div class="cards-container">
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy A05" data-precio="140" data-name="Samsung Galaxy A05">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/85HJTmjZ/samsung-galaxy-a05.webp" alt="Samsung Galaxy A05">
+        <div class="card-content">
+            <h2>Samsung Galaxy A05</h2>
+            <p>El Samsung Galaxy A05 es un smartphone Android con una pantalla HD+ de 6.7 pulgadas. Potenciado por un procesador MediaTek Helio G85 con 6GB de RAM y 128GB de almacenamiento interno, el Galaxy A05 cuenta con una cámara dual de 50MP, y una cámara selfie de 8MP, completando sus características con una batería de 5000 mAh de carga rápida, y Android 13.</p>
+            <span class="precio">$140</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy M14" data-precio="140" data-name="Samsung Galaxy M14">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/RhJBgM5w/samsung-galaxy-m14-5g.webp" alt="Samsung Galaxy M14">
+        <div class="card-content">
+            <h2>Samsung Galaxy M14</h2>
+            <p>El Samsung Galaxy M14 5G es un smartphone Android con una pantalla FHD+ de 6.6 pulgadas y 90Hz de refresco. Potenciado por un procesador Exynos 1330 con 6GB de RAM y opciones de 64GB o 128GB de almacenamiento interno expandible, el Galaxy M14 cuenta con una cámara triple de 50MP en su dorso y una cámara selfie de 13MP al frente, completando sus características con una batería de 6000 mAh con soporte para carga rápida, lector de huellas lateral, y One UI 5 basado en Android 13.</p>
+            <span class="precio">$140</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy A05s" data-precio="160" data-name="Samsung Galaxy A05s">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/6qb8v6VR/samsung-galaxy-a05s.webp" alt="Samsung Galaxy A05s">
+        <div class="card-content">
+            <h2>Samsung Galaxy A05s</h2>
+            <p>El Samsung Galaxy A05s mejora al Galaxy A05 con un procesador Snapdragon 680 acompañado de 6GB de RAM y 128GB de almacenamiento interno. La pantalla del Galaxy A05s es de 6.7 pulgadas a resolución FHD+ y tasa de refresco de 90Hz y tiene una cámara triple de 50MP en su posterior. Alimentado por una batería de 5000 mAh con soporte para carga rápida, el Galaxy A05s completa sus características con un lector de huellas lateral y Android 13.</p>
+            <span class="precio">$160</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy A06" data-precio="150" data-name="Samsung Galaxy A06">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/VsJrxnzW/samsung-galaxy-a06.webp" alt="Samsung Galaxy A06">
+        <div class="card-content">
+            <h2>Samsung Galaxy A06</h2>
+            <p>El Samsung Galaxy A06 se renueva con una pantalla HD+ de 6.7 pulgadas y un procesador MediaTek Helio G85 acompañado de hasta 6GB de RAM y 128GB de almacenamiento interno expandible. En su posterior, el Galaxy A06 cuenta con una cámara principal de 50MP con un sensor de profundidad y al frente tiene una cámara selfie de 8MP. Alimentado por una batería de 5000 mAh con soporte para carga rápida, el Galaxy A06 completa sus características con un lector de huellas lateral, y Android 14.</p>
+            <span class="precio">$150</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy A16 ( 4/128 )" data-precio="190" data-name="Samsung Galaxy A16 ( 4/128 )">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/hvRBZkSw/samsung-galaxy-a16-5g.webp" alt="Samsung Galaxy A16 ( 4/128 )">
+        <div class="card-content">
+            <h2>Samsung Galaxy A16 ( 4/128 )</h2>
+            <p>El Samsung Galaxy A16 5G cuenta con una pantalla Super AMOLED de 6.7 pulgadas y 90Hz de refresco. Potenciado por un procesador Exynos 1330 o un Dimensity 6300, dependiendo de la región, con 4GB de RAM y 128GB de almacenamiento, el Galaxy A16 tiene una cámara triple en su posterior liderada por un sensor de 50MP y una cámara de 13 megapixels al frente. El Galaxy A16 5G se alimenta de una batería de 5000 mAh con soporte para carga rápida, tiene lector de huellas lateral, protección básica contra el polvo y agua y la promesa de seis actualizaciones Android.</p>
+            <span class="precio">$190</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy F15" data-precio="190" data-name="Samsung Galaxy F15">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/Pr4jKV03/samsung-galaxy-f15.webp" alt="Samsung Galaxy F15">
+        <div class="card-content">
+            <h2>Samsung Galaxy F15</h2>
+            <p>El Samsung Galaxy F15 es un smartphone Android con una pantalla Super AMOLED FHD+ de 6.6 pulgadas con tasa de refresco de 90Hz, y potenciado por un procesador MediaTek Dimensity 6100+ con hasta 6GB de RAM y 128GB de almacenamiento. La cámara trasera triple tiene un sensor principal de 50MP y la cámara selfie es de 13MP, completando sus características con una batería de 6000 mAh de carga rápida, lector de huellas lateral, y Android 14 a bordo.</p>
+            <span class="precio">$190</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy A15 ( 6/128 )" data-precio="200" data-name="Samsung Galaxy A15 ( 6/128 )">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/qv5WZPwL/samsung-galaxy-a15.webp" alt="Samsung Galaxy A15 ( 6/128 )">
+        <div class="card-content">
+            <h2>Samsung Galaxy A15 ( 6/128 )</h2>
+            <p>El Samsung Galaxy A15 es un smartphone Android con una pantalla Super AMOLED de 6.5 pulgadas a resolución FHD+ y tasa de refresco de 90Hz. Por dentro, encontramos un chip MediaTek Helio G99 acompañado de 8GB de RAM y hasta 256GB de almacenamiento interno. La cámara posterior triple cuenta con un sensor principal de 50MP, la cámara selfie es de 13MP y suma una batería de 5000 mAh con soporte para carga rápida, lector de huellas lateral, y corre Android 14.</p>
+            <span class="precio">$200</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="moviles" data-id="Samsung Galaxy S25 Ultra (12/512)" data-precio="1500" data-name="Samsung Galaxy S25 Ultra (12/512)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/KzvLkWX6/samsung-galaxy-s25-ultra.webp" alt="Samsung Galaxy S25 Ultra (12/512)">
+        <div class="card-content">
+            <h2>Samsung Galaxy S25 Ultra (12/512)</h2>
+            <p>El Samsung Galaxy S25 Ultra llega más liviano y delgado, potenciado por un procesador Snapdragon 8 Elite for Galaxy con 12GB de RAM. y hasta 1TB de almacenamiento. Su cámara es cuádruple con un sensor principal de 200MP con estabilización óptica, un sensor telefoto de 10MP y uno de 50MP y una cámara ultrawide de 50MP, y tiene una cámara selfie de 12MP al frente. El Galaxy S25 Ultra se alimenta de una batería de 5000 mAh con soporte para carga rápida e inalámbrica, tiene parlantes stereo, lector de huellas bajo pantalla, soporta stylus S Pen y es resistente al agua.</p>
+            <span class="precio">$1500</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div></div>
+
+</div> </div>   
+
+<!-- Botón flotante del carrito -->
+<button class="carrito-flotante" onclick="mostrarFormulario()">
+        <img src="https://img.icons8.com/?size=100&id=13014&format=png&color=000000" alt="Carrito">
+        <span class="carrito-notificacion">0</span>
+    </button>
+
+<!-- Modal para mostrar el carrito y hacer la compra -->
+<div id="modal">
+    <div id="modalContent">
+        <div class="modal-container">
+            <h3>Carrito de Compras</h3>
+            <div id="carritoDetalle"></div>
+            <div>
+
+    <label for="subtotalEnvio"></label>
+<span style="display:none" id="subtotalEnvio"></span>
+</div> 
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required><br>
+                <label for="telefono">Teléfono:</label>
+                <input type="number" id="telefono" required><br>
+                <label for="opcionesEnvio">Municipio:</label>
+               
+<select id="opcionesEnvio">
+    <option value="0">Seleccionar...</option>
+<option value="550.00" data-municipio="Centro Habana">Centro Habana - 550 CUP</option>
+<option value="500.00" data-municipio="Habana Vieja">Habana Vieja - 500 CUP</option>
+<option value="550.00" data-municipio="Vedado">Vedado - 550 CUP</option>
+<option value="500.00" data-municipio="Cerro">Cerro - 500 CUP</option>
+<option value="650.00" data-municipio="Cerro Pelado">Cerro Pelado - 650 CUP</option>
+<option value="500.00" data-municipio="Casino Deportivo">Casino Deportivo - 500 CUP</option>
+
+<option value="750.00" data-municipio="Playa">Playa (hasta Calle 70) - 750 CUP</option>
+<option value="1000.00" data-municipio="Rpto Flores">Rpto Flores - 1000 CUP</option>
+<option value="2000.00" data-municipio="Jaimanitas">Jaimanitas - 2000 CUP</option>
+<option value="2500.00" data-municipio="Santa Fe">Santa Fe - 2500 CUP</option>
+
+<option value="600.00" data-municipio="Puentes Grandes">Puentes Grandes - 600 CUP</option>
+<option value="700.00" data-municipio="Marianao">Marianao (hasta 100) - 700 CUP</option>
+<option value="850.00" data-municipio="Marianao">Marianao (después de 100) - 850 CUP</option>
+
+<option value="1000.00" data-municipio="Lisa">Lisa - 1000 CUP</option>
+<option value="1400.00" data-municipio="Arroyo Arena">Arroyo Arena - 1400 CUP</option>
+<option value="1500.00" data-municipio="Barbosa">Barbosa - 1500 CUP</option>
+<option value="1600.00" data-municipio="Punta Brava">Punta Brava - 1600 CUP</option>
+
+<option value="350.00" data-municipio="Luyano">Luyano - 350 CUP</option>
+<option value="350.00" data-municipio="Santo Suárez">Santo Suárez - 350 CUP</option>
+<option value="350.00" data-municipio="Víbora">Víbora - 350 CUP</option>
+<option value="350.00" data-municipio="Lawton">Lawton (hasta Calle 15) - 350 CUP</option>
+<option value="500.00" data-municipio="Lawton">Lawton (después de Calle 15) - 500 CUP</option>
+<option value="550.00" data-municipio="Sevillano">Sevillano - 550 CUP</option>
+<option value="600.00" data-municipio="Los Pinos">Los Pinos - 600 CUP</option>
+<option value="600.00" data-municipio="Miraflores Viejo y Moderno">Miraflores Viejo y Moderno - 600 CUP</option>
+<option value="500.00" data-municipio="Santa Amalia">Santa Amalia - 500 CUP</option>
+<option value="500.00" data-municipio="La Palma">La Palma - 500 CUP</option>
+<option value="500.00" data-municipio="Víbora Park">Víbora Park - 500 CUP</option>
+<option value="800.00" data-municipio="Mantilla">Mantilla - 800 CUP</option>
+<option value="800.00" data-municipio="Parraga">Parraga - 800 CUP</option>
+<option value="800.00" data-municipio="Poey">Poey - 800 CUP</option>
+<option value="800.00" data-municipio="El Calvario/Capry">El Calvario/Capry - 800 CUP</option>
+<option value="800.00" data-municipio="Güinera">Güinera - 800 CUP</option>
+<option value="1000.00" data-municipio="Rpto Eléctrico">Rpto Eléctrico - 1000 CUP</option>
+
+<option value="3000.00" data-municipio="Bejucal">Bejucal - 3000 CUP</option>
+<option value="1500.00" data-municipio="Lutgurdita">Lutgurdita - 1500 CUP</option>
+<option value="1200.00" data-municipio="Mazorra">Mazorra - 1200 CUP</option>
+<option value="1500.00" data-municipio="Mulgoba">Mulgoba - 1500 CUP</option>
+<option value="2000.00" data-municipio="Santiago de las Vegas">Santiago de las Vegas - 2000 CUP</option>
+<option value="2000.00" data-municipio="Reparto Guadalupe">Reparto Guadalupe - 2000 CUP</option>
+<option value="700.00" data-municipio="Aldabo/Alta Habana">Aldabo/Alta Habana - 700 CUP</option>
+<option value="850.00" data-municipio="Capdevila">Capdevila - 850 CUP</option>
+<option value="900.00" data-municipio="Rio Cristal">Rio Cristal - 900 CUP</option>
+<option value="1000.00" data-municipio="Fontanar">Fontanar - 1000 CUP</option>
+<option value="1200.00" data-municipio="Abel Santamaría">Abel Santamaría - 1200 CUP</option>
+<option value="1500.00" data-municipio="Wajay">Wajay - 1500 CUP</option>
+<option value="1500.00" data-municipio="Baluarte y Rio Verde">Baluarte y Rio Verde - 1500 CUP</option>
+<option value="500.00" data-municipio="Virgen del Camino">Virgen del Camino - 500 CUP</option>
+<option value="750.00" data-municipio="Barrio Obrero">Barrio Obrero - 750 CUP</option>
+<option value="750.00" data-municipio="Rpto California">Rpto California - 750 CUP</option>
+<option value="750.00" data-municipio="La Carolina">La Carolina - 750 CUP</option>
+<option value="750.00" data-municipio="Rocafort">Rocafort - 750 CUP</option>
+<option value="800.00" data-municipio="Alturas de Luyano">Alturas de Luyano - 800 CUP</option>
+<option value="800.00" data-municipio="Luyano Moderno">Luyano Moderno - 800 CUP</option>
+<option value="800.00" data-municipio="La Cuevita">La Cuevita - 800 CUP</option>
+<option value="800.00" data-municipio="Vista Hermosa">Vista Hermosa - 800 CUP</option>
+<option value="750.00" data-municipio="Monterrey">Monterrey - 750 CUP</option>
+<option value="750.00" data-municipio="Diezmero">Diezmero - 750 CUP</option>
+<option value="1100.00" data-municipio="San Francisco de Paula">San Francisco de Paula - 1100 CUP</option>
+
+<option value="1200.00" data-municipio="Cotorro">Cotorro (preguntar por la zona) - 1200 CUP</option>
+
+<option value="800.00" data-municipio="Regla">Regla - 800 CUP</option>
+<option value="1200.00" data-municipio="Casablanca">Casablanca - 1200 CUP</option>
+
+<option value="800.00" data-municipio="Chivas">Chivas - 800 CUP</option>
+<option value="700.00" data-municipio="Centro de Guanabacoa">Centro de Guanabacoa - 700 CUP</option>
+<option value="850.00" data-municipio="El Roble">El Roble - 850 CUP</option>
+<option value="850.00" data-municipio="El Nalon">El Nalon - 850 CUP</option>
+<option value="850.00" data-municipio="La Hata">La Hata - 850 CUP</option>
+<option value="1800.00" data-municipio="Ricabar/Puente de Santa Fe y Pueblo">Ricabar/Puente de Santa Fe y Pueblo - 1800 CUP</option>
+
+<option value="1300.00" data-municipio="Cojimar">Cojimar - 1300 CUP</option>
+<option value="1300.00" data-municipio="Alamar (hasta zona 14)">Alamar (hasta zona 14) - 1300 CUP</option>
+<option value="1500.00" data-municipio="Alamar (intermitente y micro X)">Alamar (intermitente y micro X) - 1500 CUP</option>
+
+<option value="3000.00" data-municipio="Guanabo">Guanabo - 3000 CUP</option>
+<option value="3500.00" data-municipio="Campo Florido">Campo Florido - 3500 CUP</option>
+</select>
+<br>
+
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion"><br>
+
+                <label for="nota">Sitio de Referencia:</label>
+                <textarea id="nota"></textarea><br>
+                
+            </div>
+
+            <div class="modal-button-container">
+                <button id="enviarWhatsApp" onclick="enviarWhatsApp()">Enviar a WhatsApp</button>
+                <button id="cerrar" onclick="cerrarModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Información-->
+<div id="infoModal" class="modalCard" style="display:none;">
+    <div class="modal-content">
+        <span id="closeModal" class="close">×</span>
+        <img id="modalImg" src="" alt="">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <span id="modalPrice"></span>
+<form id="questionForm">
+            <input type="hidden" id="productDataId" value="">
+            <input type="hidden" id="productPrice" value="">
+            <textarea id="question" rows="4" cols="50" placeholder="Escribe tu pregunta aquí..." required></textarea><br>
+            <button id="questionButton" onclick="sendQuestion(event)">Enviar Pregunta</button>
+    </div>
+</div>
+
+<div style="position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background-color: rgba(255, 255, 255, 0.8); border-top: 1px solid #ccc; padding: 10px 0;">
+    <div style="text-align: center; flex-grow: 1;">
+      <a href="https://bit.ly/pizzas-ohlahabana" target="_blank" style="text-decoration: none;">
+        <img src="https://img.icons8.com/?size=100&id=73&format=png&color=000000" style="width: 24px; height: 24px;" alt="Home">
+        <span style="display: block; margin-top: 5px; font-size: 12px; color: #555;">Home</span>
+      </a>
+    </div>
+    <div style="text-align: center; flex-grow: 1;">
+      <a href="https://n9.cl/pizzasohlahabana" target="_blank" style="text-decoration: none;">
+        <img src="https://img.icons8.com/?size=100&id=2586&format=png&color=000000" style="width: 24px; height: 24px;" alt="App">
+        <span style="display: block; margin-top: 5px; font-size: 12px; color: #555;">App</span>
+      </a>
+    </div>
+    <div style="text-align: center; flex-grow: 1;">
+      <a href="https://chat.whatsapp.com/G0GiNwtXBekI1DJ4XjDaLZ" target="_blank" style="text-decoration: none;">
+        <img src="https://img.icons8.com/?size=100&id=11168&format=png&color=000000" style="width: 24px; height: 24px;" alt="Grupo">
+        <span style="display: block; margin-top: 5px; font-size: 12px; color: #555;">Grupo</span>
+      </a>
+    </div>
+    <div style="text-align: center; flex-grow: 1;">
+      <a href="https://wa.me/5353040553?text=*Hola*...*le contacto desde la app web Pizzas Oh' La Habana*..." target="_blank" style="text-decoration: none;">
+        <img src="https://img.icons8.com/?size=100&id=16712&format=png&color=000000" style="width: 24px; height: 24px;" alt="WhatsApp">
+        <span style="display: block; margin-top: 5px; font-size: 12px; color: #555;">WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
+<!--Página de bienvenida-->
+
+<div class="welcome-overlay" id="welcomeOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+        <div class="carousel" style="position: relative; width: 80%; max-width: 600px; height: 350px; overflow: hidden; border-radius: 10px; display: flex; flex-direction: column; align-items: center;">
+            <button class="arrow left-arrow" id="prevButton">◀</button>
+            <div class="carousel-images" id="carouselImages" style="display: flex; transition: transform 0.5s ease; width: 100%; height: 300px;">
+                <a href="" target="_blank" style="min-width: 100%;">
+                    <img src="https://i.postimg.cc/5y4pNJTK/Grid-Art-20240914-164829365.jpg" class="carousel-image" alt="Foto 1" style="width: 100%; height: 100%;">
+                </a>
+                <a href="" target="_blank" style="min-width: 100%;">
+                    <img src="https://i.postimg.cc/d0WVSjv7/Grid-Art-20240914-163109698.jpg" class="carousel-image" alt="Foto 2" style="width: 100%; height: 100%;">
+                </a>
+                <a href="" target="_blank" style="min-width: 100%;">
+                    <img src="https://i.postimg.cc/YqfGzg4F/Grid-Art-20240914-170946100.jpg" class="carousel-image" alt="Foto 3" style="width: 100%; height: 100%;">
+                </a>
+            </div>
+            <button class="arrow right-arrow" id="nextButton">▶</button>
+            <button class="close-button" id="closeButton" style="margin-top: 10px; background-color: #C70039; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel-image');
+        const totalImages = images.length;
+        const carouselImages = document.getElementById('carouselImages');
+        const overlay = document.getElementById('welcomeOverlay');
+        const closeButton = document.getElementById('closeButton');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % totalImages;
+            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function showPrevImage() {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        let autoSlideInterval = setInterval(showNextImage, 3000); // Cambia cada 3 segundos
+
+        prevButton.addEventListener('click', () => {
+            clearInterval(autoSlideInterval);
+            showPrevImage();
+            autoSlideInterval = setInterval(showNextImage, 3000); // Reiniciar el auto deslizamiento después de la interacción
+        });
+
+        nextButton.addEventListener('click', () => {
+            clearInterval(autoSlideInterval);
+            showNextImage();
+            autoSlideInterval = setInterval(showNextImage, 3000); // Reiniciar el auto deslizamiento después de la interacción
+        });
+
+        closeButton.addEventListener('click', () => {
+            overlay.style.display = 'none';
+        });
+
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 60000); // Se cierra automáticamente después de 10 segundos
+    </script>
+
+
+<script>
+document.getElementById('search').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const products = document.querySelectorAll('.card');
+
+    products.forEach(function(product) {
+        const productName = product.getAttribute('data-name').toLowerCase();
+        product.style.display = productName.includes(searchTerm) ? 'block' : 'none';
+    });
+});
+
+document.getElementById('opcionesEnvio').addEventListener('change', function() {
+    const envioCosto = parseFloat(this.value);
+    const subtotalEnvioElement = document.getElementById('subtotalEnvio');
+    subtotalEnvioElement.textContent = `$${envioCosto.toFixed(2)}`;
+    actualizarCarritoDetalle();
+});
+
+
+
+let carrito = [];
+let carritoCantidad = 0;
+
+// Función para actualizar la cantidad en la tarjeta del producto
+function actualizarCantidadEnTarjeta(card, productoId) {
+    const cantidadSpan = card.querySelector('.cantidad-span');
+    const productoExistente = carrito.find(producto => producto.id === productoId);
+    cantidadSpan.textContent = productoExistente ? productoExistente.cantidad : 0;
+}
+
+function actualizarCarritoDetalle() {
+    const carritoDetalleElement = document.getElementById('carritoDetalle');
+    carritoDetalleElement.innerHTML = ''; // Limpiar contenido previo
+
+    // Si el carrito está vacío, mostrar mensaje
+    if (carrito.length === 0) {
+        carritoDetalleElement.innerHTML = '<p>Carrito vacío</p>';
+        return;
+    }
+
+    let subtotalTotal = 0;
+
+    // Generar el contenido del carrito
+    carrito.forEach(producto => {
+        const itemElement = document.createElement('div');
+        const itemTotal = producto.cantidad * producto.precio;
+        itemElement.innerHTML = `
+            <p><strong>Pedido:</strong> ${producto.id}</p>
+            <p><strong>Cantidad:</strong> ${producto.cantidad}</p>
+            <p><strong>Subtotal:</strong> $${itemTotal.toFixed(2)}</p>
+            <hr>
+        `;
+        carritoDetalleElement.appendChild(itemElement);
+        subtotalTotal += itemTotal;
+    });
+
+    // Agregar costo de envío y total
+    const opcionesEnvio = document.getElementById('opcionesEnvio');
+    const costoEnvio = parseFloat(opcionesEnvio.options[opcionesEnvio.selectedIndex].value);
+    
+    // Calcula el total correctamente
+    const total = subtotalTotal + costoEnvio;
+    const resumenElement = document.createElement('div');
+    resumenElement.innerHTML = `
+        <p><strong>Costo de envío:</strong> $${costoEnvio.toFixed(2)}</p>
+        <p><strong>Costo Total:</strong> $${total.toFixed(2)}</p>
+    `;
+    carritoDetalleElement.appendChild(resumenElement);
+}
+
+// Función para añadir productos al carrito
+function agregarAlCarrito(button) {
+    console.log("Añadiendo al carrito");  // <-- Agregar esta línea para depuración
+    const card = button.closest('.card');
+    const productoId = card.getAttribute('data-id');
+    const precio = parseFloat(card.getAttribute('data-precio'));
+    const productoExistente = carrito.find(producto => producto.id === productoId);
+
+    if (productoExistente) {
+        productoExistente.cantidad += 1;
+    } else {
+        carrito.push({ id: productoId, cantidad: 1, precio });
+    }
+
+    carritoCantidad += 1;
+    actualizarCantidadEnTarjeta(card, productoId);
+    actualizarCarritoNotificacion();
+    actualizarCarritoDetalle();
+}
+
+
+// Función para quitar productos del carrito
+function quitarDelCarrito(button) {
+    const card = button.closest('.card');
+    const productoId = card.getAttribute('data-id');
+    const productoExistente = carrito.find(producto => producto.id === productoId);
+
+    if (productoExistente && productoExistente.cantidad > 0) {
+        productoExistente.cantidad -= 1;
+        carritoCantidad -= 1;
+
+        if (productoExistente.cantidad === 0) {
+            carrito = carrito.filter(producto => producto.id !== productoId);
+        }
+    }
+
+    actualizarCantidadEnTarjeta(card, productoId);
+    actualizarCarritoNotificacion();
+    actualizarCarritoDetalle();
+}
+
+// Función para actualizar la notificación del carrito
+function actualizarCarritoNotificacion() {
+    const notificacionElement = document.querySelector('.carrito-notificacion');
+    notificacionElement.textContent = carritoCantidad;
+}
+
+// Función para mostrar el formulario de compra
+function mostrarFormulario() {
+    document.getElementById('modal').style.display = 'flex';
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+function enviarWhatsApp() {
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const direccion = document.getElementById('direccion').value;
+    const nota = document.getElementById('nota').value;
+    const selectEnvio = document.getElementById('opcionesEnvio');
+    
+    // Validación básica
+    if (!nombre || !telefono || selectEnvio.value === "0") {
+        alert("Por favor complete todos los campos obligatorios");
+        return;
+    }
+
+    const opcionesEnvio = parseFloat(selectEnvio.value);
+    const municipio = selectEnvio.options[selectEnvio.selectedIndex].getAttribute('data-municipio');
+    
+    let mensaje = `*FORMULARIO DE COMPRA*%0A%0A`;
+    mensaje += `*Nombre:* ${nombre}%0A`;
+    mensaje += `*Teléfono:* ${telefono}%0A`;
+    mensaje += `*Municipio:* ${municipio}%0A`;
+    mensaje += `*Dirección:* ${direccion}%0A`;
+    mensaje += `*Referencia:* ${nota}%0A%0A`;
+    
+    mensaje += `*Pedidos:*%0A`;
+    carrito.forEach(producto => {
+        mensaje += `➤ ${producto.id}%0A`;
+        mensaje += `Cantidad: ${producto.cantidad}%0A`;
+        mensaje += `Subtotal: $${(producto.precio * producto.cantidad).toFixed(2)}%0A%0A`;
+    });
+    
+    const total = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0) + opcionesEnvio;
+    mensaje += `*Costo de envío:* $${opcionesEnvio.toFixed(2)}%0A`;
+    mensaje += `*TOTAL A PAGAR:* $${total.toFixed(2)}`;
+
+    const url = `https://wa.me/5353040553?text=${mensaje}`;
+    window.open(url, '_blank');
+    
+    // Limpiar carrito después del envío
+    carrito = [];
+    carritoCantidad = 0;
+    actualizarCarritoNotificacion();
+    cerrarModal();
+}
+
+
+
+// Función para cerrar el modal de información
+function cerrarInfoModal() {
+    document.getElementById('infoModal').style.display = 'none';
+}
+
+// Función para enviar la pregunta a WhatsApp
+function sendQuestion(event) {
+    event.preventDefault(); // Previene el comportamiento por defecto del formulario (recarga de la página)
+
+    const question = document.getElementById('question').value.trim();
+    const producto = document.getElementById('productDataId').value; // Obtener el data-id del producto
+    const price = document.getElementById('productPrice').value; // Obtener el precio del producto
+    const phoneNumber = '5353040553'; // Reemplaza con tu número de WhatsApp
+
+    if (question === '') {
+   errorNombre.style.display="none"('Por favor, ingresa tu pregunta.');
+        return;
+    }
+
+    const message = encodeURIComponent(`Pregunta sobre el producto:\n*Producto:* ${producto}\n*Precio:* $${price}\n*Pregunta:* ${question}`);
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+
+    // Redirigir al usuario a la URL de WhatsApp
+    window.open(whatsappURL, '_blank');
+}
+
+// Modificar la función de filtrado
+function filtrarPorCategoria(categoria) {
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        if (categoria === 'all' || card.getAttribute('data-categoria') === categoria) {
+            card.style.display = 'block'; // Cambiar de flex a block
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Función para mostrar el modal con la información del producto
+function mostrarModal(card) {
+    const imgSrc = card.querySelector('img').src;
+    const title = card.querySelector('h2').textContent;
+    const description = card.querySelector('p').textContent;
+    const price = card.querySelector('.precio').textContent;
+    const productId = card.getAttribute('data-id'); // Obtener el ID del producto
+    const productPrice = card.getAttribute('data-precio'); // Obtener el precio del producto
+
+    // Asignar la información del producto al modal
+    document.getElementById('modalImg').src = imgSrc;
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDescription').textContent = description;
+    document.getElementById('modalPrice').textContent = price;
+    document.getElementById('productDataId').value = productId;
+    document.getElementById('productPrice').value = productPrice;
+
+    // Mostrar el modal
+    document.getElementById('infoModal').style.display = 'flex';
+}
+
+// Manejador de clics para abrir el modal si se hace clic en la tarjeta
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(event) {
+        // Verificar si el clic fue en el contenedor de botones
+        if (event.target.closest('.button-container')) return;
+        
+        // Si no fue en el contenedor de botones, mostrar modal
+        mostrarModal(card);
+    });
+});
+// Función para añadir productos al carrito
+function agregarAlCarrito(button) {
+    const card = button.closest('.card');
+    const productoId = card.getAttribute('data-id');
+    const precio = parseFloat(card.getAttribute('data-precio'));
+    const productoExistente = carrito.find(producto => producto.id === productoId);
+
+    if (productoExistente) {
+        productoExistente.cantidad += 1;
+    } else {
+        carrito.push({ id: productoId, cantidad: 1, precio });
+    }
+
+    carritoCantidad += 1;
+    actualizarCantidadEnTarjeta(card, productoId);
+    actualizarCarritoNotificacion();
+    actualizarCarritoDetalle();
+}
+
+// Función para quitar productos del carrito
+function quitarDelCarrito(button) {
+    const card = button.closest('.card');
+    const productoId = card.getAttribute('data-id');
+    const productoExistente = carrito.find(producto => producto.id === productoId);
+
+    if (productoExistente && productoExistente.cantidad > 0) {
+        productoExistente.cantidad -= 1;
+        carritoCantidad -= 1;
+
+        if (productoExistente.cantidad === 0) {
+            carrito = carrito.filter(producto => producto.id !== productoId);
+        }
+    }
+
+    actualizarCantidadEnTarjeta(card, productoId);
+    actualizarCarritoNotificacion();
+    actualizarCarritoDetalle();
+}
+
+// Manejador de clics para los botones de añadir y eliminar del carrito
+function handleAddRemoveButtonClick(event) {
+    event.stopPropagation(); // Evitar que el clic abra el modal
+
+    if (event.target.classList.contains('add')) {
+        agregarAlCarrito(event.target);
+    } else if (event.target.classList.contains('remove')) {
+        quitarDelCarrito(event.target);
+    }
+} 
+
+// Delegación de eventos en el contenedor principal
+document.querySelector('.cards-container').addEventListener('click', function(event) {
+    const button = event.target.closest('button');
+    if (!button) return;
+    
+    const card = button.closest('.card');
+    if (!card) return;
+
+    if (button.classList.contains('add')) {
+        agregarAlCarrito(button);
+    } else if (button.classList.contains('remove')) {
+        quitarDelCarrito(button);
+    }
+    
+    event.stopPropagation(); // Importante para evitar conflictos con el click de la tarjeta
+});
+
+// Cerrar el modal cuando se hace clic en la "X"
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('infoModal').style.display = 'none';
+});
+
+// Cerrar el modal cuando se hace clic fuera del contenido del modal
+window.addEventListener('click', function(event) {
+    if (event.target === document.getElementById('infoModal')) {
+        document.getElementById('infoModal').style.display = 'none';
+    }
+});
+// Slider functionality
+// Slider functionality
+let currentSlide = 0;
+const slideInterval = 4000; // Intervalo en milisegundos (3 segundos)
+
+function showSlide(index) {
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    
+    if (index >= totalSlides) currentSlide = 0;
+    if (index < 0) currentSlide = totalSlides - 1;
+
+    const offset = -currentSlide * 100;
+    document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
+}
+
+// Function to move to the next slide
+function nextSlide() {
+    currentSlide++;
+    showSlide(currentSlide);
+}
+
+// Automatic slide change
+let slideTimer = setInterval(nextSlide, slideInterval);
+
+document.querySelector('.prev').addEventListener('click', () => {
+    currentSlide--;
+    showSlide(currentSlide);
+    resetTimer(); // Reset the automatic slide change timer
+});
+
+document.querySelector('.next').addEventListener('click', () => {
+    currentSlide++;
+    showSlide(currentSlide);
+    resetTimer(); // Reset the automatic slide change timer
+});
+
+// Function to reset the automatic slide change timer
+function resetTimer() {
+    clearInterval(slideTimer);
+    slideTimer = setInterval(nextSlide, slideInterval);
+}
+
+// Show the first slide initially
+showSlide(currentSlide);
+
+
+</script>
+</body>
+</html>
