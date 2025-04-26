@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script src="script.js" defer></script>
-
-    <title>Compra por WhatsApp</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <title>Havana Cell</title>
 <style>
 /* Estilos generales */
 body {
@@ -31,39 +31,196 @@ body {
     min-height: 100vh;
 }
 
-/* Header */
-.location-icon {
-    width: 20px;
-    height: 20px;
+/* ===== HEADER MODERNO CORREGIDO ===== */
+:root {
+    /* Colores principales */
+    --header-bg: linear-gradient(135deg, #1a1b2f 0%, #0a0a0a 100%);
+    --header-border: rgba(255, 255, 255, 0.08);
+    --header-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    
+    /* Texto y efectos */
+    --logo-text-gradient: linear-gradient(45deg, #f8fafc, #e2e8f0);
+    --logo-hover-gradient: linear-gradient(45deg, #60a5fa, #3b82f6);
+    --slogan-color: #fba19d;
+    
+    /* Transiciones */
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .header {
-    position: fixed; /* Hacemos el header fijo */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Aseguramos que esté por encima de todo */
-    margin: 0;
-    border-radius: 0; /* Eliminamos el borde redondeado */
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Aumentamos sombra para mejor efecto */
+    height: 85px;
+    z-index: 1000;
+    background: var(--header-bg);
+    backdrop-filter: blur(15px) saturate(160%);
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
+    border-bottom: 1px solid var(--header-border);
+    box-shadow: var(--header-shadow);
+    padding: 0 25px;
+    transition: all 0.4s var(--transition-timing);
+}
+
+.header.scrolled {
+    height: 70px;
+    background: linear-gradient(135deg, #151623 0%, #09090b 100%);
+    backdrop-filter: blur(12px) saturate(180%);
 }
 
 .logo-container {
-    max-width: 1200px;
-    margin: 2px auto; /* Centramos el contenido del header */
-    padding: 0 20px; /* Añadimos padding lateral */
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
 .logo-icon {
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
+    transition: all 0.3s var(--transition-timing);
+    filter: 
+        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25))
+        brightness(1.05);
+    padding: 6px;
+    border-radius: 14px;
 }
 
-.logo-text {
-    font-size: 24px;
-    font-weight: 700;
-    color: white;
+.logo-text-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0; /* Permite que el texto se ajuste correctamente */
 }
 
+.logo-main-text {
+    font: 700 30px/1.1 'Poppins', sans-serif;
+    background: var(--logo-text-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.8px;
+    text-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        0 1px 2px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s var(--transition-timing);
+    white-space: nowrap;
+}
+
+.logo-main-text::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--logo-hover-gradient);
+    transition: width 0.4s var(--transition-timing);
+}
+
+.slogan-container {
+    position: relative;
+    height: 26px;
+    margin-top: 4px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.slogan {
+    position: absolute;
+    font: 200 14px/1.35 'Poppins', sans-serif;
+    color: var(--slogan-color);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: sloganSlide 18s infinite;
+    text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.4),
+        0 1px 1px rgba(255, 255, 255, 0.1);
+    width: 100%; /* Asegura el ancho completo */
+    left: 0;
+}
+
+.slogan:nth-child(1) { animation-delay: 0s; }
+.slogan:nth-child(2) { animation-delay: 6s; }
+.slogan:nth-child(3) { animation-delay: 12s; }
+
+@keyframes sloganSlide {
+    0%, 100% { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    8%, 28% { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+    35% { 
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Efectos Hover */
+.logo-container:hover .logo-icon {
+    transform: rotate(-6deg) scale(1.08);
+    background: rgba(255, 255, 255, 0.1);
+    filter: brightness(1.15);
+}
+
+.logo-container:hover .logo-main-text {
+    background: var(--logo-hover-gradient);
+}
+
+.logo-container:hover .logo-main-text::after {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        height: 75px;
+        padding: 0 20px;
+    }
+    
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .logo-main-text {
+        font-size: 26px;
+    }
+    
+    .slogan {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        height: 70px;
+    }
+    
+    .logo-main-text {
+        font-size: 22px;
+    }
+    
+    .slogan-container {
+        height: 22px;
+    }
+    
+    .slogan {
+        font-size: 12px;
+    }
+    
+    .logo-container {
+        gap: 12px;
+    }
+}
 /* Barra de búsqueda */
 .search-bar {
     width: 75%;
@@ -71,7 +228,7 @@ body {
     background: #fff;
     border-radius: 10px;
     padding: 5px 10px;
-    margin: 10px auto;
+    margin: 15px auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
     align-items: center;
@@ -519,11 +676,20 @@ font-weight:bold;
 </style>
 <!--Ubicacion-->
 <header class="header">
-        <div class="logo-container">
-            <img src="https://img.icons8.com/?size=100&id=AgFKmAmo11FB&format=png&color=000000" alt="Pizza Icon" class="logo-icon">
-            <span class="logo-text"> HAVANA CELL</span>
+    <div class="logo-container">
+        <img src="https://img.icons8.com/?size=100&id=AgFKmAmo11FB&format=png&color=000000" 
+             alt="Pizza Icon" 
+             class="logo-icon">
+        <div class="logo-text-container">
+            <span class="logo-main-text">HAVANA CELL</span>
+            <div class="slogan-container">
+                <span class="slogan">Celulares, laptops, accesorios</span>
+                <span class="slogan">Productos 100% originales</span>
+                <span class="slogan">Contáctanos ahora</span>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
 <!--Barra de búsqueda-->
 <div class="search-bar">
     <input type="text" id="search" placeholder="Buscar productos...">
