@@ -21,23 +21,17 @@
 <style>
 /* Estilos generales */
 body {
-    background: linear-gradient(
-        to bottom,
-        #c237db,
-        #c237db 40%,
-        #728FCE 60%,
-        #728FCE
-    );
+    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
     background-attachment: fixed;
     margin: 0;
-    padding-bottom: 75px;
+    margin-bottom:80px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 80px;
     min-height: 100vh;
+    padding-top: 85px; /* Altura del header */
+    box-sizing: border-box;
 }
 
 /* ===== HEADER MODERNO CORREGIDO ===== */
@@ -267,7 +261,7 @@ body {
     max-width: 600px;
     margin: 0 auto; /* Solo centrado horizontal */
     overflow: hidden;
-    margin-bottom: 20px; /* Espacio fijo inferior */
+    margin-bottom: 2px; /* Espacio fijo inferior */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -291,7 +285,7 @@ body {
         .slide img {
             margin: 8px auto;
             width: 98%;
-            height: 204px;
+            height: 150px;
             border-radius: 20px;
             overflow: hidden;
         }
@@ -322,7 +316,7 @@ body {
 
 /* Tarjetas de productos */
 .cards-container {
-    width: 95%;
+    width: 90%;
     max-width: 1200px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -344,26 +338,28 @@ body {
 }
 
 .card img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    width: 50%;       /* Ancho deseado (ajusta según necesidad) */
+    height: auto;     /* Mantiene proporción original */
+    object-fit: cover;/* Evita distorsión de la imagen */
+    display: block;   /* ¡Importante! Cambia de inline a block */
+    margin: 5px auto;   /* Centrado horizontal: 0 (top/bottom) auto (left/right) */
 }
 
 .card-content {
-    padding: 10px;
+    padding: 5px;
 }
 
 .card h2 {
     font-size: 16px;
-    color: #2d3436;
-    margin: 0 0 8px;
+    color: #646464;
+    margin: 0 0 4px;
     font-weight: 600;
    overflow:hidden;
     display:-webkit-box;
     -webkit-line-clamp:1;
     -webkit-box-orient:vertical;
     text-overflow:ellipsis;
-    margin:2px 2px;
+    margin:1px 1px;
 }
 .card p {
     font-size: 13px;
@@ -376,14 +372,14 @@ body {
     font-size: 18px;
     color: #00CED1;
     font-weight: 700;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .button-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 15px;
+    padding: 12px 10px;
     background: #f8f9fa;
     border-top: 1px solid #eee;
 }
@@ -653,35 +649,123 @@ font-weight:bold;
     }
 }
 /* Filtros */
+/* ===== FILTROS CON SCROLL + ESTILOS ORIGINALES ===== */
 .filter-boton-filtros {
-    width: 100%;
-    overflow-x: auto;
-    padding: 15px 15;
-    margin: 0px 0;
+  width: 100%;
+  overflow-x: auto;
+  padding: 15px 0;
+  margin: 0;
+  max-width: 100vw;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+.filter-boton-filtros::-webkit-scrollbar {
+  height: 6px;
+}
+
+.filter-boton-filtros::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-boton-filtros::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 3px;
 }
 
 .filter-buttons {
-    display: inline-flex;
-    gap: 8px;
-    padding: 0 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0 10px 10px;
+  gap: 20px;
+  width: max-content;
+  min-width: 100%;
 }
 
+/* ===== ESTILOS ORIGINALES DE BOTONES (COLORES/EFECTOS) ===== */
 .filter-buttons button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 25px;
-    background: #00CED1;
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.filter-buttons button:hover {
-    background: #009999;
-    transform: translateY(-2px);
+.button-content {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
+
+/* Colores base por categoría */
+.filter-buttons button[data-category="all"] i { background: #4CAF50; }
+.filter-buttons button[data-category="moviles"] i { background: #2196F3; }
+.filter-buttons button[data-category="laptops"] i { background: #FF5252; }
+.filter-buttons button[data-category="accesorios"] i { background: #FFD600; }
+.filter-buttons button[data-category="otros"] i { background: #9C27B0; }
+
+.filter-buttons button i {
+  font-size: 24px;
+  color: white;
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-buttons button span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.filter-buttons button:hover i {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  filter: brightness(1.1);
+}
+
+/* Estado activo */
+.filter-buttons button[data-active="true"] i {
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px white, 0 0 0 4px currentColor;
+}
+
+.filter-buttons button[data-active="true"] span {
+  color: currentColor;
+  font-weight: 700;
+}
+
+/* Definición de colores para texto y borde */
+.filter-buttons button[data-category="all"] { color: #4CAF50; }
+.filter-buttons button[data-category="moviles"] { color: #2196F3; }
+.filter-buttons button[data-category="laptops"] { color: #FF5252; }
+.filter-buttons button[data-category="accesorios"] { color: #FFD600; }
+.filter-buttons button[data-category="otros"] { color: #9C27B0; }
+
+/* Efecto al hacer clic */
+.filter-buttons button:active i {
+  transform: scale(0.95);
+}
+
 </style>
 <!--Ubicacion-->
 <header class="header">
@@ -715,15 +799,40 @@ font-weight:bold;
     </div>
 </div>
 
-<!-- Botones de filtro -->
 <div class="filter-boton-filtros">
-<div class="filter-buttons">
-<button onclick="filtrarPorCategoria('all')">Todos</button>
-    <button onclick="filtrarPorCategoria('moviles')">Móviles </button>
-    <button onclick="filtrarPorCategoria('laptops')">Laptops</button>
-    <button onclick="filtrarPorCategoria('accesorios')">Accesorios</button>
-    <button onclick="filtrarPorCategoria('otros')">Otros</button>
-</div></div></div>
+  <div class="filter-buttons">
+    <button onclick="filtrarPorCategoria('all')" data-active="false" data-category="all">
+      <div class="button-content">
+        <i class="fas fa-box"></i>
+        <span>Todos</span>
+      </div>
+    </button>
+    <button onclick="filtrarPorCategoria('moviles')" data-active="false" data-category="moviles">
+      <div class="button-content">
+        <i class="fas fa-mobile-alt"></i>
+        <span>Móviles</span>
+      </div>
+    </button>
+    <button onclick="filtrarPorCategoria('laptops')" data-active="false" data-category="laptops">
+      <div class="button-content">
+        <i class="fas fa-laptop"></i>
+        <span>Laptops</span>
+      </div>
+    </button>
+    <button onclick="filtrarPorCategoria('accesorios')" data-active="false" data-category="accesorios">
+      <div class="button-content">
+        <i class="fas fa-headphones-alt"></i>
+        <span>Accesorios</span>
+      </div>
+    </button>
+    <button onclick="filtrarPorCategoria('otros')" data-active="false" data-category="otros">
+      <div class="button-content">
+        <i class="fas fa-ellipsis-h"></i>
+        <span>Otros</span>
+      </div>
+    </button>
+  </div>
+</div>
 
 <div class="cards-container">
 <div class="card" data-categoria="moviles" data-id="Samsung Galaxy A05" data-precio="140" data-name="Samsung Galaxy A05">
