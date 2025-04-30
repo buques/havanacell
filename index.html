@@ -315,7 +315,7 @@ body {
     right: 10px;
 }
 
-/* Tarjetas de productos */
+/* ===== TARJETAS DE PRODUCTOS - VERSIÓN FINAL ===== */
 .cards-container {
     width: 90%;
     max-width: 1200px;
@@ -332,62 +332,88 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
     overflow: hidden;
     transition: transform 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 240px; /* Altura reducida */
 }
 
 .card:hover {
     transform: translateY(-5px);
 }
 
+.card-content-wrapper {
+    flex: 1;
+    padding-bottom: 50px; /* Espacio ajustado para botones */
+    display: flex;
+    flex-direction: column;
+}
+
 .card img {
-    width: 50%;       /* Ancho deseado (ajusta según necesidad) */
-    height: auto;     /* Mantiene proporción original */
-    object-fit: cover;/* Evita distorsión de la imagen */
-    display: block;   /* ¡Importante! Cambia de inline a block */
-    margin: 5px auto;   /* Centrado horizontal: 0 (top/bottom) auto (left/right) */
+    width: 50%; /* Ancho reducido */
+    height: 110px; /* Altura reducida */
+    object-fit: contain;
+    display: block;
+    margin: 8px auto 5px; /* Margen reducido */
 }
 
 .card-content {
-    padding: 5px;
+    padding: 6px 10px; /* Padding ajustado */
+    flex-grow: 1;
+    position: relative;
 }
 
 .card h2 {
-    font-size: 16px;
-    color: #646464;
-    margin: 0 0 4px;
+    font-size: 14px; /* Tamaño reducido */
+    color: #444;
+    margin: 0 0 8px; /* Margen aumentado */
     font-weight: 600;
-   overflow:hidden;
-    display:-webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient:vertical;
-    text-overflow:ellipsis;
-    margin:1px 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+    padding: 0 2px;
 }
+
 .card p {
     font-size: 13px;
     color: #636e72;
     margin: 0;
     line-height: 1.4;
-    display: none; /* Oculto por diseño móvil */
+    display: none;
 }
+
 .card .precio {
-    font-size: 18px;
+    font-size: 16px; /* Tamaño reducido */
     color: #00CED1;
     font-weight: 700;
-    margin: 5px 0;
+    margin: 8px 0;
+    position: absolute;
+    bottom: 5px; /* Posición relativa al contenido */
+    left: 10px;
+    right: 10px;
 }
 
+/* ===== BOTONES - VERSIÓN COMPACTA ===== */
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background: #f8f9fa;
     border-top: 1px solid #eee;
+    padding: 8px 10px; /* Padding lateral aumentado */
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center;
+    gap: 15px; /* Espacio entre elementos */
+    width: 100%; /* Ocupar todo el ancho */
+    box-sizing: border-box;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
 }
-
 .button-container button {
-    width: 38px;
-    height: 38px;
+    width: 34px; /* Tamaño reducido */
+    height: 34px;
     border-radius: 50%;
     border: 2px solid;
     display: grid;
@@ -418,11 +444,11 @@ body {
 }
 
 .cantidad-span {
-    font-size: 16px;
+    font-size: 14px; /* Tamaño reducido */
     font-weight: 600;
     color: #2A5C82;
+    margin: 0 3px;
 }
-
 /* Modales */
 .modalCard {
     position: fixed;
@@ -1124,21 +1150,63 @@ font-weight:bold;
         <button class="remove"><i class="fas fa-trash-alt"></i></button>
     </div>
 </div>
+
+<!-- ========== ACER ========== -->
+<div class="card" data-categoria="laptops" data-id="Acer Aspire 5 a515-43-r19l" data-precio="410" data-name="Acer Aspire 5 (8/128+500GB)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/xd0cjjSS/Aspire-A515-43.png" alt="Acer Aspire 5">
+        <div class="card-content">
+            <h2>Acer Aspire 5 a515-43-r19l</h2>
+            <p>Pantalla 15.6" | Procesador AMD Ryzen 3 3200U | 8GB RAM | Almacenamiento: 128GB SSD + 500GB HDD | Ideal para tareas cotidianas y multimedia</p>
+            <span class="precio">$410</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="laptops" data-id="Acer Aspire a514-54-501z" data-precio="450" data-name="Acer Aspire a514 (8/256+500GB)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/h4xz05s6/61-PIRIOTQZL-AC-UF894-1000-QL80-FMwebp.webp" alt="Acer Aspire a514">
+        <div class="card-content">
+            <h2>Acer Aspire a514-54-501z</h2>
+            <p>Pantalla 14" | Intel Core i5-1135G7 (11va Gen) | 8GB RAM | 256GB SSD + 500GB HDD | Diseño compacto y rendimiento equilibrado</p>
+            <span class="precio">$450</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="laptops" data-id="Acer Aspire a315-59-53er" data-precio="520" data-name="Acer Aspire a315 (8/256GB)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/mgZPB24W/71rn0-D4h-HUL-AC-UF894-1000-QL80-FMwebp.webp" alt="Acer Aspire a315">
+        <div class="card-content">
+            <h2>Acer Aspire a315-59-53er</h2>
+            <p>Pantalla 15.6" | Intel Core i5-1235U (12va Gen) | 8GB RAM | 256GB SSD | Procesador de última generación para productividad</p>
+            <span class="precio">$520</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<!-- ========== HP ========== -->
 <div class="card" data-categoria="laptops" data-id="Portátil HP EliteBook 835 G7" data-precio="420.00" data-name="Portátil HP EliteBook 835 G7">
     <div class="card-content-wrapper">
         <img src="https://i.postimg.cc/GmPTdW2P/51-D9-Uc-DF4i-L.jpg" alt="Portátil HP EliteBook 835 G7">
         <div class="card-content">
             <h2>Portátil HP EliteBook 835 G7</h2>
-            <p>Portátil HP EliteBook 835 G7
-AMD Ryzen 7 Pro
-4750U / hasta 4,1 GHz
-Windows 10 Pro de 64 bits
-Gráficos Radeon
-16 GB de RAM
-SSD SED de 512 GB, cifrado TCG Opal 2, NVMe, TLC
-Pantalla IPS de 13,3" con resolución 1920 x 1080 (Full HD)
-Wi-Fi 6
-kbd: EE. UU.</p>
+            <p>AMD Ryzen 7 Pro 4750U / hasta 4,1 GHz | Windows 10 Pro 64 bits | Gráficos Radeon | 16 GB RAM | SSD SED 512 GB NVMe | Pantalla IPS 13.3" Full HD | Wi-Fi 6 | Teclado US</p>
             <span class="precio">$420.00</span>
         </div>
     </div>
@@ -1149,35 +1217,13 @@ kbd: EE. UU.</p>
     </div>
 </div>
 
-
-<div class="card" data-categoria="laptops" data-id="Dell Latitude 5510" data-precio="380.00" data-name="Dell Latitude 5510">
+<div class="card" data-categoria="laptops" data-id="HP Elitebook 840 G10" data-precio="620" data-name="HP Elitebook 840 (16/256GB)">
     <div class="card-content-wrapper">
-        <img src="https://i.postimg.cc/d0ddkh4C/6409-dell-latitude-5510-intel-core-i5-10210u-8gb-256gb-ssd-156-opiniones.webp" alt="Dell Latitude 5510">
+        <img src="https://i.postimg.cc/VNrLkJHp/41oli2jv4o-L-AC-UF894-1000-QL80-FMwebp.webp" alt="HP Elitebook 840">
         <div class="card-content">
-            <h2>Dell Latitude 5510</h2>
-            <p>Procesador Intel Core i5-10210U (6MB Cache, 1.6GHz)
-Memoria RAM 8GB DDR4-SDRAM (1 x 8)
-Almacenamiento 256GB SSD
-Unidad óptica No dispone
-Display 39.6 cm (15.6") Full HD 1920 x 1080 WVA
-Controlador gráfico Intel® UHD Graphics
-Conectividad
-WiFi 6 (802.11ax) + Bluetooth
-Cámara de portátil 2 MP, 720p
-Micrófono Sí
-Batería 4 Celdas, 51Wh
-Conexiones
-USB 3.2 (3.1 Gen 1) x 1
-USB-C x 1
-RJ45 x 1
-HDMI x 1
-Combo Jack x 1
-Lector de tarjetas : SD,SDHC,SDXC
-Sistema operativo Windows 10 Pro 64 bits
-Dimensiones (Ancho x Profundidad x Altura) 359 x 22.4 x 236 mm
-Peso 1.82 kg
-Color Plata</p>
-            <span class="precio">$380.00</span>
+            <h2>HP Elitebook 840 G10</h2>
+            <p>Pantalla 14" | Intel Core i5-1335U (13va Gen) | 16GB RAM | 256GB SSD | Modelo empresarial con hardware actualizado</p>
+            <span class="precio">$620</span>
         </div>
     </div>
     <div class="button-container">
@@ -1187,32 +1233,28 @@ Color Plata</p>
     </div>
 </div>
 
-
+<!-- ========== ASUS ========== -->
+<div class="card" data-categoria="laptops" data-id="Asus E410K" data-precio="270" data-name="Asus E410K (4/64GB)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/fy2RbYD4/61u-N4j-Wual-L-AC-UF894-1000-QL80-FMwebp.webp" alt="Asus E410K">
+        <div class="card-content">
+            <h2>Asus E410K</h2>
+            <p>Pantalla 14" | Intel Celeron N4500 | 4GB RAM | 64GB eMMC | Opción económica para uso básico</p>
+            <span class="precio">$270</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
 <div class="card" data-categoria="laptops" data-id="Asus Q325c" data-precio="370.00" data-name="Asus Q325c">
     <div class="card-content-wrapper">
         <img src="https://i.postimg.cc/pXTFQGsR/ODTWc0o-Om-Un-Y4d4-W01.jpg" alt="Asus Q325c">
         <div class="card-content">
             <h2>Asus Q325c</h2>
-            <p>Pantalla: 14¨ TouchScreen FHD (1920 x 1080)
-Disco Duro: 256GB SSD
-Microprocesador: Intel Core i7-7500U 2.70GHz
-Memoria RAM: 16GB
-Puertos Externos:
--USB Type C x 1
--Puerto para audifonos x 1
-SO: Windows 11
-Incluye Mouse Inalámbrico
-Incluye Paquete de Programas:
--Office 2021 (Word, Excel, etc..)
--AIMP (Reproductor de audio)
--TeraCopy ( Copiador)
--WinRAR ( Descomprimir )
--Zentimo (Extractor de dispositivos externos)
--Everithing (Buscador)
--PotPlayer (Reproductor de Video)
--K lite codec pack ( Códec Video)
-Color: Negro
-Condición: Grado A Plus</p>
+            <p>Pantalla: 14¨ TouchScreen FHD (1920 x 1080) | Intel Core i7-7500U 2.70GHz | 16GB RAM | 256GB SSD | Windows 11 | Incluye Mouse Inalámbrico y paquete de programas (Office 2021, WinRAR, etc.)</p>
             <span class="precio">$370.00</span>
         </div>
     </div>
@@ -1223,21 +1265,78 @@ Condición: Grado A Plus</p>
     </div>
 </div>
 
-
 <div class="card" data-categoria="laptops" data-id="Asus VivoBook F1500EA-WB51" data-precio="490.00" data-name="Asus VivoBook F1500EA-WB51">
     <div class="card-content-wrapper">
         <img src="https://i.postimg.cc/tCtMPgvL/23314e2f-6b86-49a0-ac04-1bdbade096d5.jpg" alt="Asus VivoBook F1500EA-WB51">
         <div class="card-content">
             <h2>Asus VivoBook F1500EA-WB51</h2>
-            <p>𝐏𝐚𝐧𝐭𝐚𝐥𝐥𝐚: 15.6" FHD 1920 x 1080
-𝐏𝐫𝐨𝐜𝐞𝐬𝐚𝐝𝐨𝐫: Core™ i5-1135G7 2.4GHZ - 4.2GHz
-𝐃𝐢𝐬𝐜𝐨: 256GB SSD NVMe M.2
-𝐌𝐞𝐦𝐨𝐫𝐢𝐚: 8GB DDR4
-𝐒𝐢𝐬𝐭𝐞𝐦𝐚: Windows 11 Home x64
-𝐆𝐫𝐚𝐟𝐢𝐜𝐚: Intel Iris Xe Graphics
-𝐆𝐚𝐫𝐚𝐧𝐭𝐢𝐚: 6 Meses
-𝐂𝐚𝐫𝐚𝐜𝐭𝐞𝐫𝐢𝐬𝐭𝐢𝐜𝐚𝐬: 1x USB-C │ 1x USB 3.2 │ 2x USB 2.0 │ 1x HDMI 1.4b │ 1x Audio Microfono │ Wi-Fi 5, Bluetooth 4.1.</p>
+            <p>Pantalla 15.6" FHD | Core i5-1135G7 2.4-4.2GHz | 8GB DDR4 | 256GB SSD NVMe | Windows 11 | Intel Iris Xe Graphics | Conexiones: USB-C, USB 3.2, HDMI</p>
             <span class="precio">$490.00</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<!-- ========== DELL ========== -->
+<div class="card" data-categoria="laptops" data-id="Dell Latitude 5510" data-precio="380.00" data-name="Dell Latitude 5510">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/d0ddkh4C/6409-dell-latitude-5510-intel-core-i5-10210u-8gb-256gb-ssd-156-opiniones.webp" alt="Dell Latitude 5510">
+        <div class="card-content">
+            <h2>Dell Latitude 5510</h2>
+            <p>Intel Core i5-10210U | 8GB RAM | 256GB SSD | Pantalla 15.6" Full HD | WiFi 6 | USB-C/HDMI/RJ45 | Windows 10 Pro | 1.82 kg | Durabilidad militar</p>
+            <span class="precio">$380.00</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="laptops" data-id="Dell Latitude 3420" data-precio="450" data-name="Dell Latitude 3420 (16/250GB)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/PxvgDZWs/71sno-Uzx-E8-L-AC-UF894-1000-QL80-FMwebp.webp" alt="Dell Latitude 3420">
+        <div class="card-content">
+            <h2>Dell Latitude 3420</h2>
+            <p>Pantalla 14" | Intel Core i5-1135G7 | 16GB RAM | 250GB SSD | Portabilidad profesional con conectividad avanzada</p>
+            <span class="precio">$450</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<!-- ========== MICROSOFT SURFACE ========== -->
+<div class="card" data-categoria="laptops" data-id="Microsoft Surface Pro7" data-precio="420" data-name="Surface Pro7 (16/512GB)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/kXgyhCHD/71-ODa-Nx46-L-AC-UF894-1000-QL80-FMwebp.webp" alt="Surface Pro7">
+        <div class="card-content">
+            <h2>Microsoft Surface Pro7</h2>
+            <p>Pantalla 12" Touchscreen | Intel Core i7-4650U | 16GB RAM | 512GB SSD | Versión mejorada con mayor memoria RAM</p>
+            <span class="precio">$420</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+<div class="card" data-categoria="laptops" data-id="Microsoft Surface 3 Pro" data-precio="370" data-name="Surface 3 Pro (8/512GB)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/vBwzPVRd/650-1200.jpg" alt="Surface 3 Pro">
+        <div class="card-content">
+            <h2>Microsoft Surface 3 Pro</h2>
+            <p>Pantalla 12" Touchscreen | Intel Core i7-4650U | 8GB RAM | 512GB SSD | Tableta convertible con soporte para Surface Pen</p>
+            <span class="precio">$370</span>
         </div>
     </div>
     <div class="button-container">
