@@ -1720,7 +1720,7 @@ function filtrarPorCategoria(categoria) {
     
     cards.forEach(card => {
         if (categoria === 'all' || card.getAttribute('data-categoria') === categoria) {
-            card.style.display = 'block'; // Cambiar de flex a block
+            card.style.display = 'flex'; // Cambiar a flex en lugar de block
         } else {
             card.style.display = 'none';
         }
