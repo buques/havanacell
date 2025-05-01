@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLB9JPK4WN"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -738,7 +739,7 @@ font-weight:bold;
 .filter-buttons button[data-category="all"] i { background: #4CAF50; }
 .filter-buttons button[data-category="moviles"] i { background: #2196F3; }
 .filter-buttons button[data-category="laptops"] i { background: #FF5252; }
-.filter-buttons button[data-category="accesorios"] i { background: #FFD600; }
+.filter-buttons button[data-category="smartwatches"] i { background: #FFD600; }
 .filter-buttons button[data-category="otros"] i { background: #9C27B0; }
 
 .filter-buttons button i {
@@ -785,7 +786,7 @@ font-weight:bold;
 .filter-buttons button[data-category="all"] { color: #4CAF50; }
 .filter-buttons button[data-category="moviles"] { color: #2196F3; }
 .filter-buttons button[data-category="laptops"] { color: #FF5252; }
-.filter-buttons button[data-category="accesorios"] { color: #FFD600; }
+.filter-buttons button[data-category="smartwatches"] { color: #FFD600; }
 .filter-buttons button[data-category="otros"] { color: #9C27B0; }
 
 /* Efecto al hacer clic */
@@ -846,10 +847,10 @@ font-weight:bold;
         <span>Laptops</span>
       </div>
     </button>
-    <button onclick="filtrarPorCategoria('accesorios')" data-active="false" data-category="accesorios">
+    <button onclick="filtrarPorCategoria('smartwatches')" data-active="false" data-category="smartwatches">
       <div class="button-content">
-        <i class="fas fa-headphones-alt"></i>
-        <span>Accesorios</span>
+     <i class="bi bi-smartwatch"></i>
+        <span>Smartwatch</span>
       </div>
     </button>
     <button onclick="filtrarPorCategoria('otros')" data-active="false" data-category="otros">
@@ -1337,6 +1338,70 @@ font-weight:bold;
             <h2>Microsoft Surface 3 Pro</h2>
             <p>Pantalla 12" Touchscreen | Intel Core i7-4650U | 8GB RAM | 512GB SSD | Tableta convertible con soporte para Surface Pen</p>
             <span class="precio">$370</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="smartwatches" data-id="Redmi Watch 5 Active" data-precio="65" data-name="Redmi Watch 5 Active">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/0NDHM4yx/613-Bmayl-AWL-AC-UF894-1000-QL80-FMwebp.webp" alt="Redmi Watch 5 Active">
+        <div class="card-content">
+            <h2>Redmi Watch 5 Active</h2>
+            <p>Pantalla LCD grande de 2” | Micrófono doble con reducción de ruido | Llamadas Bluetooth® | Batería hasta 18 días | Monitoreo de oxígeno en sangre y estrés | Frecuencia cardíaca 24/7</p>
+            <span class="precio">$65</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="smartwatches" data-id="Smartwatch Wireless Call" data-precio="30" data-name="Smartwatch Wireless Call (Rojo y Blanco)">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/5jcVmHTT/71-U8-Ym-q-Fz-L-AC-UF894-1000-QL80-FMwebp-2.webp" alt="Smartwatch Wireless Call">
+        <div class="card-content">
+            <h2>Smartwatch Wireless Call</h2>
+            <p>Pantalla HD 1.28" | Múltiples modos deportivos | Alertas de información | Control de música | Monitoreo del sueño | Podómetro | Compatible con Android/iOS | Colores: Rojo y Blanco</p>
+            <span class="precio">$30</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="smartwatches" data-id="Samsung Galaxy Fit 3" data-precio="85" data-name="Samsung Galaxy Fit 3">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/3wrdG6gp/41ywz3v-Okm-L-AC-UF1000-1000-QL80-FMwebp.webp" alt="Samsung Galaxy Fit 3">
+        <div class="card-content">
+            <h2>Samsung Galaxy Fit 3</h2>
+            <p>Pantalla AMOLED 1.6" | 18.5g de peso | Material aluminio | Resistencia 5ATM + IP68 | Seguimiento del sueño | +100 modos de entrenamiento | Notificaciones instantáneas | Interacción directa desde muñeca</p>
+            <span class="precio">$85</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="add"><i class="fas fa-shopping-cart"></i></button>
+        <span class="cantidad-span">0</span>
+        <button class="remove"><i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+
+<div class="card" data-categoria="smartwatches" data-id="Kumi GW5" data-precio="55" data-name="Kumi GW5 Smartwatch">
+    <div class="card-content-wrapper">
+        <img src="https://i.postimg.cc/qvw7pL97/61-W2-IBA1rf-L-AC-UF894-1000-QL80-FMwebp.webp" alt="Kumi GW5">
+        <div class="card-content">
+            <h2>Kumi GW5 Smartwatch</h2>
+            <p>Pantalla 1.39" TFT | Resolución 360x360 px | Diseño redondo | Correa de silicona | Color negro | Múltiples modos deportivos | Compatible con Android/iOS</p>
+            <span class="precio">$55</span>
         </div>
     </div>
     <div class="button-container">
